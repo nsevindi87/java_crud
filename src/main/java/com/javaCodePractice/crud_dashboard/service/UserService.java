@@ -30,7 +30,7 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    public boolean updateUser(Long id, User user){
+    public User updateUser(Long id, User user){
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
             User existingUser = optionalUser.get();
@@ -38,10 +38,9 @@ public class UserService {
             existingUser.setEmail(user.getEmail());
             existingUser.setAddress(user.getEmail());
             existingUser.setPhoneNumber(user.getPhoneNumber());
-            userRepository.save(existingUser);
-            return true;
+            return userRepository.save(existingUser);
         }else{
-            return false;
+            return null;
         }
     }
 }

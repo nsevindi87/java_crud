@@ -41,8 +41,8 @@ public class UserController {
 
     @PatchMapping("/user/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user){
-        boolean success = userService.updateUser(id,user);
-        if(success) return ResponseEntity.ok().build();
+        User  updatedUser = userService.updateUser(id,user);
+        if(updatedUser != null) return ResponseEntity.ok(updatedUser);
         return  ResponseEntity.notFound().build();
     }
 }
