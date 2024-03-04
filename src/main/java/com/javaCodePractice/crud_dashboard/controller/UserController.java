@@ -38,4 +38,11 @@ public class UserController {
         if(user == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(user);
     }
+
+    @PatchMapping("/user/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user){
+        boolean success = userService.updateUser(id,user);
+        if(success) return ResponseEntity.ok().build();
+        return  ResponseEntity.notFound().build();
+    }
 }
