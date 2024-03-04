@@ -3,6 +3,7 @@ package com.javaCodePractice.crud_dashboard.controller;
 import com.javaCodePractice.crud_dashboard.entity.User;
 import com.javaCodePractice.crud_dashboard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,8 +27,15 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/user/{id}")
     public void deleteUser(@PathVariable Long id){
         userService.deleteUser(id);
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id){
+        User user = userService.getUserById(id);
+        if(user == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(user);
     }
 }
