@@ -14,6 +14,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    private String id;
 
     @PostMapping("/user")
     public User postUser(@RequestBody User user){
@@ -23,5 +24,10 @@ public class UserController {
     @GetMapping("/users")
     public List<User> getAllUsers(){
         return userService.getAllUsers();
+    }
+
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable Long id){
+        userService.deleteUser(id);
     }
 }
